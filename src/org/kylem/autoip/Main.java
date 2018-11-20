@@ -18,47 +18,21 @@ public class Main
 	{
 		IPUpdater ipUpdater = new IPUpdater();
 		Thread t1 = new Thread(ipUpdater);
+		
+		//Here we add the domains to be checked
+		ipUpdater.addDomain("soupisasalad.com");
+		ipUpdater.addDomain("wedgewednesday.us");
+		ipUpdater.addDomain("kylem.org");
+		ipUpdater.addDomain("gompeicoin.com");
+		
 		t1.start();
 		try 
 		{
-			System.out.println(getIp());
+			System.out.println(IPUpdater.getIp());
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * Taken from StackOverflow at https://stackoverflow.com/questions/2939218/getting-the-external-ip-address-in-java
-	 * @return String of external IP computer is currently connected to.
-	 * @throws Exception
-	 */
-	public static String getIp() throws Exception
-	{
-		URL whatismyip = new URL("http://checkip.amazonaws.com");
-        BufferedReader in = null;
-        try 
-        {
-            in = new BufferedReader(new InputStreamReader(
-                    whatismyip.openStream()));
-            String ip = in.readLine();
-            return ip;
-        } 
-        finally 
-        {
-            if (in != null) 
-            {
-                try 
-                {
-                    in.close();
-                } 
-                catch (IOException e) 
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 }
